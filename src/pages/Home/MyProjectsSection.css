@@ -1,0 +1,82 @@
+.projects-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .projects-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .projects-text h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .responsive-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  .counters label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .counters input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  .mainBtn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .mainBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .projects-container {
+      padding: 15px;
+    }
+  
+    .projects-text h4 {
+      font-size: 1rem;
+    }
+  
+    .responsive-textarea,
+    .counters input {
+      font-size: 0.9rem;
+    }
+  
+    .mainBtn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+  }
+  
