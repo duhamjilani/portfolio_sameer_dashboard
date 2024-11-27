@@ -3,7 +3,7 @@ import './Academic.css'
 import { v4 as uuidv4 } from 'uuid';
 const Academic = () => {
   const [academic, setAcademic] = useState([
-    { id: uuidv4(), title: 'React Training', date: '2023', description: 'Comprehensive React.js training program.',experienceType:5},
+    { id: uuidv4(), title: 'React Training', date: '2023', description: 'Comprehensive React.js training program.',experienceType:8},
     { id: uuidv4(), title: 'JavaScript Bootcamp', date: '2022', description: 'Intensive JavaScript learning experience.',experienceType:1 },
     { id: uuidv4(), title: 'Frontend Membership', date: '2021', description: 'Exclusive membership for frontend developers.',experienceType:4 },
   ]);
@@ -99,6 +99,26 @@ const Academic = () => {
               <option value='3'>University Administrative Position</option>
               <option value='4'>Student Advising</option>
               <option value='5'>Examination Boards</option>
+            </select>
+          </p>
+
+
+          <p>
+            <strong> detailed Experience type :</strong>
+            <select
+              name="experienceType"
+              value={editedItem.experienceType}
+              onChange={handleInputChange}
+            >
+              
+              <option value='1'>Department</option>
+              <option value='2'>School</option>
+              <option value='3'>University </option>
+              <option value='4'>International</option>
+              <option value='5'>PHD</option>
+              <option value='6'>Master</option>
+              <option value='7'>Bachelor</option>
+              <option value='8'>Industrial</option>
             </select>
           </p>
 
