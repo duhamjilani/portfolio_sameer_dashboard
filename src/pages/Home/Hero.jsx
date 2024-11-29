@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { apiURL } from "../../constants/apiURL";
 // import './Hero.css'
 const Hero = () => {
   const [heroText, setHeroText] = useState("");
 
   const fetchData = () => {
     axios
-      .get("http://localhost:5008/Home")
+      .post(`${apiURL}content/get-content`, {
+        page: "LandingPage",
+        section: "Hero",
+      })
       .then((response) => {
-        const homeData = response.data[0];
-        setHeroText(homeData.heroText);
-        console.log(homeData.heroText);
+        console.log(response);
+        const homeData = response.data.data.content;
+        setHeroText(homeData);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
-        alert("Something went wrong while fetching data.");
+        // alert("Something went wrong while fetching data.");
       });
   };
 
@@ -24,7 +28,6 @@ const Hero = () => {
   }, []);
 
   const sendData = () => {
-  
     Swal.fire({
       title: "Update Confirmation",
       text: "Do you want to update the text?",
@@ -33,22 +36,29 @@ const Hero = () => {
       confirmButtonText: "Yes",
       cancelButtonText: "No",
     }).then((result) => {
-     
       if (result.isConfirmed) {
         axios
-          .patch("http://localhost:5008/Home", {
-            Home: [{ heroText }],
+          .put(`${apiURL}content/update`, {
+            page: "LandingPage",
+            section: "Hero",
+            content: heroText,
           })
           .then((response) => {
-            console.log("Data sent successfully:", response.data);
-            Swal.fire("Updated!", "The text has been updated successfully.", "success");
+            Swal.fire(
+              "Updated!",
+              "The text has been updated successfully.",
+              "success"
+            );
           })
           .catch((error) => {
             console.error("Error sending data: ", error);
-            Swal.fire("Error", "Something went wrong while updating data.", "error");
+            Swal.fire(
+              "Error",
+              "Something went wrong while updating data.",
+              "error"
+            );
           });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-       
         Swal.fire("Cancelled", "No changes were made.", "info");
       }
     });
@@ -65,7 +75,9 @@ const Hero = () => {
         value={heroText}
         onChange={(e) => setHeroText(e.target.value)}
       />
-      <button onClick={sendData} className="mainBtn">Update</button>
+      <button onClick={sendData} className="mainBtn">
+        Update
+      </button>
     </div>
   );
 };

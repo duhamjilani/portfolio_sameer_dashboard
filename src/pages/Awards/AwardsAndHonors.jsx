@@ -1,71 +1,131 @@
-import React, { useState ,useEffect} from 'react';
-import './AwardsAndHonors.css';
-import axios from 'axios'
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useEffect } from "react";
+import "./AwardsAndHonors.css";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { apiURL } from "../../constants/apiURL";
 const AwardsAndHonors = () => {
-  const [awards, setAwards] = useState([
-    { id: uuidv4(), title: 'Best Developer', year: '2023', description: 'Awarded for outstanding contribution to software development.',visible:1 },
-    { id: uuidv4(), title: 'Employee of the Year', year: '2022', description: 'Awarded for exceptional performance throughout the year.' ,visible:1},
-    { id: uuidv4(), title: 'Innovator of the Year', year: '2021', description: 'Awarded for innovative solutions and creative problem-solving.',visible:0 },
-  ]);
+  const [awards, setAwards] = useState([]);
+  const [countVisible, setCountVisible] = useState(0);
+  const [editMode, setEditMode] = useState(null);
+  const [editedAward, setEditedAward] = useState({
+    title: "",
+    date: "",
+    description: "",
+    isVisible: false,
+  });
 
-  const [editMode, setEditMode] = useState(null); 
-  const [editedAward, setEditedAward] = useState({ title: '', year: '', description: '',visible:'' }); 
-
-  
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const newAward = {
-      id: awards.length + 1,  
-      title: '',
-      year: '',
-      description: '',
-      visible:0
+      title: "",
+      date: "",
+      description: "",
+      isVisible: 0,
+      type: "Award",
     };
-    setAwards([...awards, newAward]);
+
+    try {
+      const award = await axios.post(`${apiURL}info/add`, newAward);
+      setAwards([...awards, award.data.data]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
- 
-  const handleUpdate = (id) => {
-    const updatedAwards = awards.map((award) =>
-      award.id === id ? { ...award, ...editedAward } : award
-    );
-    setAwards(updatedAwards);
-    setEditMode(null); 
-    setEditedAward({ title: '', year: '', description: '',visible:0 }); 
+  const handleUpdate = async (id) => {
+    try {
+      const updatedReward = await axios.put(
+        `${apiURL}info/update/${id}`,
+        editedAward.isVisible && Number(countVisible) >= 3
+          ? { ...editedAward, isVisible: false }
+          : editedAward
+      );
+
+      const updatedAwards = awards.map((award) =>
+        award._id === id ? { ...award, ...updatedReward.data.data } : award
+      );
+      setAwards(updatedAwards);
+      setEditMode(null);
+      setEditedAward({
+        title: "",
+        date: "",
+        description: "",
+        isVisible: false,
+      });
+      setCountVisible(
+        updatedAwards.filter((item) => {
+          return item.isVisible && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
- 
-  const handleDelete = (id) => {
-    const updatedAwards = awards.filter((award) => award.id !== id);
-    setAwards(updatedAwards);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${apiURL}info/delete/${id}`);
+
+      const updatedAwards = awards.filter((award) => award._id !== id);
+      setAwards(updatedAwards);
+      setCountVisible(
+        awards.filter((item) => {
+          return item.isVisible === true && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  
   const handleEdit = (award) => {
-    setEditMode(award.id); 
-    setEditedAward({ title: award.title, year: award.year, description: award.description ,visible:award.visible}); 
+    setEditMode(award._id);
+    setEditedAward({
+      title: award.title,
+      date: award.date,
+      description: award.description,
+      isVisible: award.isVisible,
+    });
   };
 
- 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedAward((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleFetchAwards = async () => {
+    try {
+      const awards = await axios.post(`${apiURL}info/get-infos-by-type`, {
+        type: "Award",
+      });
+      setAwards(awards.data.data);
+      setCountVisible(
+        awards.data.data.filter((item) => {
+          return item.isVisible === true && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(countVisible);
+
+  useEffect(() => {
+    handleFetchAwards();
+  }, []);
+
   return (
     <div id="awards-container" className="awards-container">
       <h2>Awards and Honors</h2>
 
-     
-      <button onClick={handleCreate} className="create-btn">Create New Award</button>
+      <button onClick={handleCreate} className="create-btn">
+        Create New Award
+      </button>
 
-     
       <div className="awards-list">
         {awards.map((award) => (
-          <div key={award.id} className="award-card">
-            {editMode === award.id ? (
+          <div key={award._id} className="award-card">
+            {editMode === award._id ? (
               <>
-                
                 <h3>
                   <input
                     type="text"
@@ -79,8 +139,8 @@ const AwardsAndHonors = () => {
                   <strong>Year:</strong>
                   <input
                     type="text"
-                    name="year"
-                    value={editedAward.year}
+                    name="date"
+                    value={editedAward.date}
                     onChange={handleInputChange}
                     placeholder="Year"
                   />
@@ -97,29 +157,40 @@ const AwardsAndHonors = () => {
                 <p>
                   <strong>Visible on home page:</strong>
                   <select
-                    name="visible"
-                    value={award.visible}
+                    name="isVisible"
+                    value={editedAward.isVisible}
                     onChange={handleInputChange}
                   >
-                    
-                    <option value='1'>yes</option>
-                    <option value='0'>no</option>
+                    <option value={false}>no</option>
+                    <option value={true}>yes</option>
                   </select>
                 </p>
-                <button onClick={() => handleUpdate(award.id)} className="mainBtn">Update Award</button>
+                <button
+                  onClick={() => handleUpdate(award._id)}
+                  className="mainBtn"
+                >
+                  Update Award
+                </button>
               </>
             ) : (
               <>
-               
                 <h3>{award.title}</h3>
-                <p><strong>Year:</strong> {award.year}</p>
-                <p><strong>Description:</strong> {award.description}</p>
-                <button onClick={() => handleEdit(award)} className="mainBtn">Edit Award</button>
+                <p>
+                  <strong>Year:</strong> {award.date}
+                </p>
+                <p>
+                  <strong>Description:</strong> {award.description}
+                </p>
+                <button onClick={() => handleEdit(award)} className="mainBtn">
+                  Edit Award
+                </button>
               </>
             )}
 
-           
-            <button onClick={() => handleDelete(award.id)} className="delete-btn">
+            <button
+              onClick={() => handleDelete(award._id)}
+              className="delete-btn"
+            >
               Delete Award
             </button>
           </div>

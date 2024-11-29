@@ -1,47 +1,47 @@
-import React, { useState } from 'react';
-import './Research.css';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState } from "react";
+import "./Research.css";
+import { v4 as uuidv4 } from "uuid";
 const Research = () => {
   const [researchList, setResearchList] = useState([
     {
       id: uuidv4(),
-      title: 'AI and Ethics',
-      date: '2023-09-01',
-      description: 'Exploring the ethical implications of AI.',
-      link: 'https://example.com/ai-ethics',
-      type: 'Journal',
-      visible:0
+      title: "AI and Ethics",
+      date: "2023-09-01",
+      description: "Exploring the ethical implications of AI.",
+      link: "https://example.com/ai-ethics",
+      type: "Journal",
+      visible: 0,
     },
     {
       id: uuidv4(),
-      title: 'Quantum Computing Advances',
-      date: '2022-06-15',
-      description: 'A comprehensive study on quantum computing.',
-      link: 'https://example.com/quantum-computing',
-      type: 'Conference',
-      visible:1
+      title: "Quantum Computing Advances",
+      date: "2022-06-15",
+      description: "A comprehensive study on quantum computing.",
+      link: "https://example.com/quantum-computing",
+      type: "Conference",
+      visible: 1,
     },
   ]);
 
   const [editMode, setEditMode] = useState(null);
   const [editedItem, setEditedItem] = useState({
-    title: '',
-    date: '',
-    description: '',
-    link: '',
-    type: '',
-    visible:''
+    title: "",
+    date: "",
+    description: "",
+    link: "",
+    type: "",
+    visible: "",
   });
 
   const handleCreate = () => {
     const newResearch = {
       id: uuidv4(),
-      title: '',
-      date: '',
-      description: '',
-      link: '',
-      type: 'Journal', 
-       visible:''
+      title: "",
+      date: "",
+      description: "",
+      link: "",
+      type: "Journal",
+      visible: "",
     };
     setResearchList([...researchList, newResearch]);
   };
@@ -52,7 +52,14 @@ const Research = () => {
     );
     setResearchList(updatedResearch);
     setEditMode(null);
-    setEditedItem({ title: '', date: '', description: '', link: '', type: '',visible:'' });
+    setEditedItem({
+      title: "",
+      date: "",
+      description: "",
+      link: "",
+      type: "",
+      visible: "",
+    });
   };
 
   const handleDelete = (id) => {
@@ -68,7 +75,7 @@ const Research = () => {
       description: item.description,
       link: item.link,
       type: item.type,
-      visible:item.visible
+      visible: item.visible,
     });
   };
 
@@ -102,7 +109,7 @@ const Research = () => {
                 <p>
                   <strong>Date:</strong>
                   <input
-                    type="date"
+                    type="text"
                     name="date"
                     value={editedItem.date}
                     onChange={handleInputChange}
@@ -147,12 +154,14 @@ const Research = () => {
                     value={editedItem.visible}
                     onChange={handleInputChange}
                   >
-                    
-                    <option value='1'>yes</option>
-                    <option value='0'>no</option>
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
                   </select>
                 </p>
-                <button onClick={() => handleUpdate(item.id)} className="mainBtn">
+                <button
+                  onClick={() => handleUpdate(item.id)}
+                  className="mainBtn"
+                >
                   Update
                 </button>
               </>
@@ -166,7 +175,7 @@ const Research = () => {
                   <strong>Description:</strong> {item.description}
                 </p>
                 <p>
-                  <strong>Link:</strong>{' '}
+                  <strong>Link:</strong>{" "}
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.link}
                   </a>
@@ -179,7 +188,10 @@ const Research = () => {
                 </button>
               </>
             )}
-            <button onClick={() => handleDelete(item.id)} className="delete-btn">
+            <button
+              onClick={() => handleDelete(item.id)}
+              className="delete-btn"
+            >
               Delete
             </button>
           </div>
@@ -190,4 +202,3 @@ const Research = () => {
 };
 
 export default Research;
-
