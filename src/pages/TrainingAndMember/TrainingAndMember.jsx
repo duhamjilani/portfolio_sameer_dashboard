@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./TrainingAndMember.css";
 import axios from "axios";
 import { apiURL } from "../../constants/apiURL";
+import { useNavigate } from "react-router-dom";
 const TrainingAndMember = () => {
   const [training, setTraining] = useState([]);
   const [countVisible, setCountVisible] = useState(0);
@@ -12,6 +13,15 @@ const TrainingAndMember = () => {
     description: "",
     isVisible: false,
   });
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("token");
+
+    if (!isLogin) {
+      navigate("/login");
+    }
+  }, []);
 
   const handleFetchData = async () => {
     try {

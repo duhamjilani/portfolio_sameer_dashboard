@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { apiURL } from "../../constants/apiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -7,33 +7,52 @@ import {
   MDBValidationItem,
   MDBInput,
   MDBBtn,
-} from 'mdb-react-ui-kit';
+} from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [formValue, setFormValue] = useState({
-    name: '',
-    password: '',
+    name: "",
+    password: "",
   });
+
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   
+    try {
+      const login = await axios.post(`${apiURL}admin/login`, formValue);
+
+      if (login.data.isMatch) {
+        localStorage.setItem("token", login.data.isMatch);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <MDBValidation className="p-4 border rounded shadow-sm" onSubmit={handleSubmit}>
+      <MDBValidation
+        className="p-4 border rounded shadow-sm"
+        onSubmit={handleSubmit}
+      >
         <h3 className="text-center mb-4">Log In</h3>
 
         {/* Username */}
-        <MDBValidationItem feedback="Please enter your username." invalid className="mb-3">
+        <MDBValidationItem
+          feedback="Please enter your username."
+          invalid
+          className="mb-3"
+        >
           <MDBInput
-            value={formValue.username}
-            name="username"
+            value={formValue.name}
+            name="name"
             onChange={onChange}
             id="validationCustomUsername"
             required
@@ -42,7 +61,11 @@ const LogIn = () => {
         </MDBValidationItem>
 
         {/* Password */}
-        <MDBValidationItem feedback="Please enter your password." invalid className="mb-4">
+        <MDBValidationItem
+          feedback="Please enter your password."
+          invalid
+          className="mb-4"
+        >
           <MDBInput
             value={formValue.password}
             name="password"

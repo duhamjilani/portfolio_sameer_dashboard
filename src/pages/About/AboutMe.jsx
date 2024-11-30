@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "./AboutMe.css";
 import { apiURL } from "../../constants/apiURL";
+import { useNavigate } from "react-router-dom";
 const AboutMe = () => {
   const [aboutText, setAboutText] = useState("");
   const fetchData = () => {
@@ -62,6 +63,15 @@ const AboutMe = () => {
       }
     });
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("token");
+
+    if (!isLogin) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <div>
       <div className="aboutMe-container">

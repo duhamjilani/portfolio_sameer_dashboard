@@ -2,8 +2,18 @@ import { React, useEffect, useState } from "react";
 import "./Academic.css";
 import axios from "axios";
 import { apiURL } from "../../constants/apiURL";
+import { useNavigate } from "react-router-dom";
 const Academic = () => {
   const [academic, setAcademic] = useState([]);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("token");
+
+    if (!isLogin) {
+      navigate("/login");
+    }
+  }, []);
 
   const fetchData = async () => {
     try {

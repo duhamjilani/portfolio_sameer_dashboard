@@ -1,24 +1,34 @@
-import React from 'react'
-import './Home.css'
+import React, { useEffect } from "react";
+import "./Home.css";
 import {
-    AwardsHome,
-    Hero,
-    MyProjectsSection,
-    ResearchHome,
-    TrainingHome,
-    WorkExpHome
-  } from "../index";
+  AwardsHome,
+  Hero,
+  MyProjectsSection,
+  ResearchHome,
+  TrainingHome,
+  WorkExpHome,
+} from "../index";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
-  return (
-    <div className='home-container'>
-      <Hero/>
-      <MyProjectsSection/>
-      {/* <WorkExpHome/> */}
-      <ResearchHome/>
-      <AwardsHome/>
-      <TrainingHome/>
-    </div>
-  )
-}
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("token");
 
-export default Home
+    if (!isLogin) {
+      navigate("/login");
+    }
+  }, []);
+
+  return (
+    <div className="home-container">
+      <Hero />
+      <MyProjectsSection />
+      {/* <WorkExpHome/> */}
+      <ResearchHome />
+      <AwardsHome />
+      <TrainingHome />
+    </div>
+  );
+};
+
+export default Home;

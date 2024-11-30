@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Research.css";
 import axios from "axios";
 import { apiURL } from "../../constants/apiURL";
+import { useNavigate } from "react-router-dom";
 const Research = () => {
   const [researchList, setResearchList] = useState([]);
   const [countVisible, setCountVisible] = useState(0);
@@ -14,6 +15,15 @@ const Research = () => {
     isVisible: false,
     category: "Journal",
   });
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("token");
+
+    if (!isLogin) {
+      navigate("/login");
+    }
+  }, []);
 
   const handleFetchResearchs = async () => {
     try {

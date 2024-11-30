@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./AwardsAndHonors.css";
 import axios from "axios";
 import { apiURL } from "../../constants/apiURL";
+import { useNavigate } from "react-router-dom";
 const AwardsAndHonors = () => {
   const [awards, setAwards] = useState([]);
   const [countVisible, setCountVisible] = useState(0);
@@ -12,6 +13,15 @@ const AwardsAndHonors = () => {
     description: "",
     isVisible: false,
   });
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("token");
+
+    if (!isLogin) {
+      navigate("/login");
+    }
+  }, []);
 
   const handleCreate = async () => {
     const newAward = {
