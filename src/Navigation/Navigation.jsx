@@ -19,7 +19,7 @@ const Navigation = () => {
       <Route path="/research" element={<Research />} />
       <Route path="/awards" element={< AwardsAndHonors/>} />
       <Route path="/training" element={< TrainingAndMember />} />
-      <Route path="/industrialExp" element={<IndustrialExp />} />
+      {/* <Route path="/industrialExp" element={<IndustrialExp />} /> */}
     </Routes>
   );
 };

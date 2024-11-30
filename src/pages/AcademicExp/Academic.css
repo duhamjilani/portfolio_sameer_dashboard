@@ -1,41 +1,41 @@
 .academic-container {
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
-  .academic-list {
-    display: flex;
-    flex-wrap: wrap;
-  
-    gap: 20px;
-  }
-  
-  .academic-card {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 22%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .academic-card h3 input,
-  .academic-card p input,
-  .academic-card p textarea {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .academic-card textarea {
-    height: 100px;
-  }
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.academic-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.academic-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.academic-card h3 input,
+.academic-card p input,
+.academic-card p textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.academic-card textarea {
+  height: 100px;
+}

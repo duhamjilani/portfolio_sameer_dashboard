@@ -1,71 +1,98 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./TrainingAndMember.css";
-import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { apiURL } from "../../constants/apiURL";
 const TrainingAndMember = () => {
-  const [training, setTraining] = useState([
-    {
-      id: uuidv4(),
-      title: "React Training",
-      year: "2023",
-      description: "Comprehensive React.js training program.",
-      showTitle: 0,
-    },
-    {
-      id: uuidv4(),
-      title: "JavaScript Bootcamp",
-      year: "2022",
-      description: "Intensive JavaScript learning experience.",
-      showTitle: 0,
-    },
-    {
-      id: uuidv4(),
-      title: "Frontend Membership",
-      year: "2021",
-      description: "Exclusive membership for frontend developers.",
-      showTitle: 1,
-    },
-  ]);
-
+  const [training, setTraining] = useState([]);
+  const [countVisible, setCountVisible] = useState(0);
   const [editMode, setEditMode] = useState(null);
   const [editedItem, setEditedItem] = useState({
     title: "",
-    year: "",
+    date: "",
     description: "",
-    showTitle: "",
+    isVisible: false,
   });
 
-  const handleCreate = () => {
+  const handleFetchData = async () => {
+    try {
+      const data = await axios.post(`${apiURL}info/get-infos-by-type`, {
+        type: "Training",
+      });
+      setTraining(data.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleFetchData();
+  }, []);
+
+  const handleCreate = async () => {
     const newTraining = {
-      id: uuidv4(),
+      type: "Training",
       title: "",
-      year: "",
+      date: "",
       description: "",
-      showTitle: "",
+      isVisible: false,
     };
-    setTraining([...training, newTraining]);
+
+    try {
+      const trainings = await axios.post(`${apiURL}info/add`, newTraining);
+      setTraining([...training, trainings.data.data]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleUpdate = (id) => {
-    const updatedTraining = training.map((item) =>
-      item.id === id ? { ...item, ...editedItem } : item
-    );
-    setTraining(updatedTraining);
-    setEditMode(null);
-    setEditedItem({ title: "", year: "", description: "", showTitle: "" });
+  const handleUpdate = async (id) => {
+    try {
+      const updatedReward = await axios.put(
+        `${apiURL}info/update/${id}`,
+        editedItem.isVisible && Number(countVisible) >= 10
+          ? { ...editedItem, isVisible: false }
+          : editedItem
+      );
+
+      const updatedTraining = training.map((item) =>
+        item._id === id ? updatedReward.data.data : item
+      );
+      setTraining(updatedTraining);
+      setEditMode(null);
+      setEditedItem({ title: "", date: "", description: "", isVisible: false });
+      setCountVisible(
+        updatedTraining.filter((item) => {
+          return item.isVisible && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleDelete = (id) => {
-    const updatedTraining = training.filter((item) => item.id !== id);
-    setTraining(updatedTraining);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${apiURL}info/delete/${id}`);
+
+      const updatedAwards = training.filter((award) => award._id !== id);
+      setTraining(updatedAwards);
+      setCountVisible(
+        updatedAwards.filter((item) => {
+          return item.isVisible === true && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEdit = (item) => {
-    setEditMode(item.id);
+    setEditMode(item._id);
     setEditedItem({
       title: item.title,
-      year: item.year,
+      date: item.date,
       description: item.description,
-      showTitle: item.showTitle,
+      isVisible: item.isVisible,
     });
   };
 
@@ -84,8 +111,8 @@ const TrainingAndMember = () => {
 
       <div className="training-list">
         {training.map((item) => (
-          <div key={item.id} className="training-card">
-            {editMode === item.id ? (
+          <div key={item._id} className="training-card">
+            {editMode === item._id ? (
               <>
                 <h3>
                   <input
@@ -100,8 +127,8 @@ const TrainingAndMember = () => {
                   <strong>Year:</strong>
                   <input
                     type="text"
-                    name="year"
-                    value={editedItem.year}
+                    name="date"
+                    value={editedItem.date}
                     onChange={handleInputChange}
                     placeholder="Year"
                   />
@@ -118,16 +145,16 @@ const TrainingAndMember = () => {
                 <p>
                   <strong>Visible title on home page:</strong>
                   <select
-                    name="showTitle"
-                    value={editedItem.showTitle}
+                    name="isVisible"
+                    value={editedItem.isVisible}
                     onChange={handleInputChange}
                   >
-                    <option value="1">yes</option>
-                    <option value="0">no</option>
+                    <option value={false}>no</option>
+                    <option value={true}>yes</option>
                   </select>
                 </p>
                 <button
-                  onClick={() => handleUpdate(item.id)}
+                  onClick={() => handleUpdate(item._id)}
                   className="mainBtn"
                 >
                   Update
@@ -137,7 +164,7 @@ const TrainingAndMember = () => {
               <>
                 <h3>{item.title}</h3>
                 <p>
-                  <strong>Year:</strong> {item.year}
+                  <strong>Year:</strong> {item.date}
                 </p>
                 <p>
                   <strong>Description:</strong> {item.description}
@@ -148,7 +175,7 @@ const TrainingAndMember = () => {
               </>
             )}
             <button
-              onClick={() => handleDelete(item.id)}
+              onClick={() => handleDelete(item._id)}
               className="delete-btn"
             >
               Delete

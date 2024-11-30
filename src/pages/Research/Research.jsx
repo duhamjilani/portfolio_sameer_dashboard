@@ -1,81 +1,114 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Research.css";
-import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { apiURL } from "../../constants/apiURL";
 const Research = () => {
-  const [researchList, setResearchList] = useState([
-    {
-      id: uuidv4(),
-      title: "AI and Ethics",
-      date: "2023-09-01",
-      description: "Exploring the ethical implications of AI.",
-      link: "https://example.com/ai-ethics",
-      type: "Journal",
-      visible: 0,
-    },
-    {
-      id: uuidv4(),
-      title: "Quantum Computing Advances",
-      date: "2022-06-15",
-      description: "A comprehensive study on quantum computing.",
-      link: "https://example.com/quantum-computing",
-      type: "Conference",
-      visible: 1,
-    },
-  ]);
-
+  const [researchList, setResearchList] = useState([]);
+  const [countVisible, setCountVisible] = useState(0);
   const [editMode, setEditMode] = useState(null);
   const [editedItem, setEditedItem] = useState({
     title: "",
     date: "",
     description: "",
     link: "",
-    type: "",
-    visible: "",
+    isVisible: false,
+    category: "Journal",
   });
 
-  const handleCreate = () => {
+  const handleFetchResearchs = async () => {
+    try {
+      const researchs = await axios.post(`${apiURL}info/get-infos-by-type`, {
+        type: "Research",
+      });
+
+      setResearchList(researchs.data.data);
+      setCountVisible(
+        researchs.data.data.filter((item) => {
+          return item.isVisible === true && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleFetchResearchs();
+  }, []);
+
+  const handleCreate = async () => {
     const newResearch = {
-      id: uuidv4(),
+      type: "Research",
       title: "",
       date: "",
       description: "",
       link: "",
-      type: "Journal",
-      visible: "",
+      category: "Journal",
+      isVisible: false,
     };
-    setResearchList([...researchList, newResearch]);
+
+    try {
+      const research = await axios.post(`${apiURL}info/add`, newResearch);
+      setResearchList([...researchList, research.data.data]);
+      setCountVisible(
+        [...researchList, research.data.data].filter((item) => {
+          return item.isVisible === true && item;
+        }).length
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleUpdate = (id) => {
-    const updatedResearch = researchList.map((item) =>
-      item.id === id ? { ...item, ...editedItem } : item
-    );
-    setResearchList(updatedResearch);
-    setEditMode(null);
-    setEditedItem({
-      title: "",
-      date: "",
-      description: "",
-      link: "",
-      type: "",
-      visible: "",
-    });
+  const handleUpdate = async (id) => {
+    try {
+      const research = await axios.put(
+        `${apiURL}info/update/${id}`,
+        editedItem.isVisible && Number(countVisible) >= 3
+          ? { ...editedItem, isVisible: false }
+          : editedItem
+      );
+      const updatedResearch = researchList.map((item) =>
+        item._id === id ? research.data.data : item
+      );
+      setResearchList(updatedResearch);
+      setEditMode(null);
+      setEditedItem({
+        title: "",
+        date: "",
+        description: "",
+        link: "",
+        isVisible: false,
+        category: "Journal",
+      });
+
+      setCountVisible(
+        updatedResearch.filter((item) => {
+          return item.isVisible && item;
+        }).length
+      );
+    } catch (error) {}
   };
 
-  const handleDelete = (id) => {
-    const updatedResearch = researchList.filter((item) => item.id !== id);
-    setResearchList(updatedResearch);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${apiURL}info/delete/${id}`);
+      const updatedResearch = researchList.filter((item) => item._id !== id);
+      setResearchList(updatedResearch);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEdit = (item) => {
-    setEditMode(item.id);
+    setEditMode(item._id);
     setEditedItem({
       title: item.title,
       date: item.date,
       description: item.description,
       link: item.link,
-      type: item.type,
-      visible: item.visible,
+      isVisible: item.isVisible,
+      category: item.category,
     });
   };
 
@@ -93,9 +126,10 @@ const Research = () => {
       </button>
 
       <div className="research-list">
-        {researchList.map((item) => (
-          <div key={item.id} className="research-card">
-            {editMode === item.id ? (
+        {researchList.map((item, index) => (
+          <div key={item._id} className="research-card">
+            <div className="research-card-counter">{index + 1}</div>
+            {editMode === item._id ? (
               <>
                 <h3>
                   <input
@@ -137,8 +171,8 @@ const Research = () => {
                 <p>
                   <strong>Type:</strong>
                   <select
-                    name="type"
-                    value={editedItem.type}
+                    name="category"
+                    value={editedItem.category}
                     onChange={handleInputChange}
                   >
                     <option value="Book Chapter">Book Chapter</option>
@@ -150,16 +184,16 @@ const Research = () => {
                 <p>
                   <strong>Visible on home page:</strong>
                   <select
-                    name="visible"
-                    value={editedItem.visible}
+                    name="isVisible"
+                    value={editedItem.isVisible}
                     onChange={handleInputChange}
                   >
-                    <option value="1">yes</option>
-                    <option value="0">no</option>
+                    <option value={false}>no</option>
+                    <option value={true}>yes</option>
                   </select>
                 </p>
                 <button
-                  onClick={() => handleUpdate(item.id)}
+                  onClick={() => handleUpdate(item._id)}
                   className="mainBtn"
                 >
                   Update
@@ -181,7 +215,7 @@ const Research = () => {
                   </a>
                 </p>
                 <p>
-                  <strong>Type:</strong> {item.type}
+                  <strong>Type:</strong> {item.category}
                 </p>
                 <button onClick={() => handleEdit(item)} className="mainBtn">
                   Edit
@@ -189,7 +223,7 @@ const Research = () => {
               </>
             )}
             <button
-              onClick={() => handleDelete(item.id)}
+              onClick={() => handleDelete(item._id)}
               className="delete-btn"
             >
               Delete

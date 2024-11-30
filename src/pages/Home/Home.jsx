@@ -13,7 +13,7 @@ const Home = () => {
     <div className='home-container'>
       <Hero/>
       <MyProjectsSection/>
-      <WorkExpHome/>
+      {/* <WorkExpHome/> */}
       <ResearchHome/>
       <AwardsHome/>
       <TrainingHome/>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AwardsAndHonors.css";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { apiURL } from "../../constants/apiURL";
 const AwardsAndHonors = () => {
   const [awards, setAwards] = useState([]);
@@ -107,7 +106,6 @@ const AwardsAndHonors = () => {
       console.log(error);
     }
   };
-  console.log(countVisible);
 
   useEffect(() => {
     handleFetchAwards();
