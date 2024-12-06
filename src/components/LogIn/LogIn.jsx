@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { apiURL } from "../../constants/apiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -15,6 +15,11 @@ const LogIn = () => {
     name: "",
     password: "",
   });
+  useEffect(()=>{
+const token=localStorage.getItem("token")
+if (token)
+navigate("/dashboardaAzZdashboard");
+  },[])
 
   const navigate = useNavigate();
 
@@ -26,10 +31,14 @@ const LogIn = () => {
     e.preventDefault();
     try {
       const login = await axios.post(`${apiURL}admin/login`, formValue);
+console.log(login)
 
       if (login.data.isMatch) {
-        localStorage.setItem("token", login.data.isMatch);
-        navigate("/");
+        localStorage.setItem("token", login.data.isMatch); 
+        navigate("/dashboardaAzZdashboard");
+      } else {
+        Swal.fire("Login Failed", "Incorrect username or password.", "error");
+        console.log("error")
       }
     } catch (error) {
       console.log(error);

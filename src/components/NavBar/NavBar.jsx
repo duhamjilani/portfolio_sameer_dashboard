@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MDBContainer,
   MDBNavbar,
@@ -13,6 +13,21 @@ import { MDBIcon } from "mdb-react-ui-kit";
 
 const NavBar = () => {
   const [openNav, setOpenNav] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  if (!isLoggedIn) {
+    return null; 
+  }
+
   return (
     <>
       <MDBNavbar expand="lg" light bgColor="rgba(248, 248, 248, 1)">
@@ -29,32 +44,27 @@ const NavBar = () => {
           <MDBCollapse navbar open={openNav}>
             <MDBNavbarNav>
               <MDBNavbarItem>
-                <MDBNavbarLink active aria-current="page" href="/">
+                <MDBNavbarLink active aria-current="page" href="/dashboardaAzZdashboard">
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/aboutMe">About</MDBNavbarLink>
+                <MDBNavbarLink href="/dashboardaAzZdashboard/aboutMe">About</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/awards">Awards</MDBNavbarLink>
+                <MDBNavbarLink href="/dashboardaAzZdashboard/awards">Awards</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/training">
+                <MDBNavbarLink href="/dashboardaAzZdashboard/training">
                   Training And MemberShips
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/research">Research</MDBNavbarLink>
+                <MDBNavbarLink href="/dashboardaAzZdashboard/research">Research</MDBNavbarLink>
               </MDBNavbarItem>
-              {/* <MDBNavbarItem>
-                <MDBNavbarLink href="/industrialExp">
-                  Industrial Experience
-                </MDBNavbarLink>
-              </MDBNavbarItem> */}
               <MDBNavbarItem>
-                <MDBNavbarLink href="/academicExp">
-                  Academic And Professional Experience{" "}
+                <MDBNavbarLink href="/dashboardaAzZdashboard/academicExp">
+                  Academic And Professional Experience
                 </MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>

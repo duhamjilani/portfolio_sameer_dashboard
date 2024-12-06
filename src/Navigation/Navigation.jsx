@@ -1,4 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import {
   AboutMe,
   Academic,
@@ -12,15 +17,20 @@ import LogIn from "../components/LogIn/LogIn";
 
 const Navigation = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/aboutMe" element={<AboutMe />} />
-      <Route path="/academicExp" element={<Academic />} />
-      <Route path="/research" element={<Research />} />
-      <Route path="/awards" element={<AwardsAndHonors />} />
-      <Route path="/training" element={<TrainingAndMember />} />
-      <Route path="/login" element={<LogIn />} />
-    </Routes>
+   
+      <Routes>
+        {/* Redirect the root URL ("/") to the login page */}
+        <Route path="/" element={<Navigate to="/dashboardaAzZdashboard/login" />} />
+
+        <Route path="/dashboardaAzZdashboard" element={<Home />} />
+        <Route path="/dashboardaAzZdashboard/aboutMe" element={<AboutMe />} />
+        <Route path="/dashboardaAzZdashboard/academicExp" element={<Academic />} />
+        <Route path="/dashboardaAzZdashboard/research" element={<Research />} />
+        <Route path="/dashboardaAzZdashboard/awards" element={<AwardsAndHonors />} />
+        <Route path="/dashboardaAzZdashboard/training" element={<TrainingAndMember />} />
+        <Route path="/dashboardaAzZdashboard/login" element={<LogIn />} />
+      </Routes>
+    
   );
 };
 
