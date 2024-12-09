@@ -31,17 +31,18 @@ navigate("/dashboardaAzZdashboard");
     e.preventDefault();
     try {
       const login = await axios.post(`${apiURL}admin/login`, formValue);
-console.log(login)
 
       if (login.data.isMatch) {
         localStorage.setItem("token", login.data.isMatch); 
+       
+      
         navigate("/dashboardaAzZdashboard");
       } else {
         Swal.fire("Login Failed", "Incorrect username or password.", "error");
-        console.log("error")
+       
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
