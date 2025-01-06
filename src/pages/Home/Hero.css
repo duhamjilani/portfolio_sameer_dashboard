@@ -1,11 +1,17 @@
+.big-container{
+    display: flex;
+    gap:20px;
+    height: 80vh;
+}
+
+
 .hero-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-   
-    height: 50vh;
+    gap: 40px;
+    height: 70vh;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px; 
@@ -52,6 +58,35 @@
 .mainBtn:hover {
     background-color: #0056b3;
 }
+.file-upload-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: rgba(0, 52, 102, 1);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: rgba(0, 52, 102, 0.8);
+  }
+  
+  .cvUploader {
+    display: none; 
+  }
+.form{
+   display: flex;
+   gap:5px;
+  
+}  
 
 @media (max-width: 768px) {
     .hero-container h4 {

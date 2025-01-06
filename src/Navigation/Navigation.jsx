@@ -28,6 +28,8 @@ const Navigation = () => {
         <Route path="/dashboardaAzZdashboard/research" element={<Research />} />
         <Route path="/dashboardaAzZdashboard/awards" element={<AwardsAndHonors />} />
         <Route path="/dashboardaAzZdashboard/training" element={<TrainingAndMember />} />
+        <Route path="/dashboardaAzZdashboard/industrialExp" element={<IndustrialExp />} />
+
         <Route path="/dashboardaAzZdashboard/login" element={<LogIn />} />
       </Routes>
     

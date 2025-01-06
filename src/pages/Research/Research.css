@@ -11,6 +11,9 @@ h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+form{
+  width: 50%;
+}
 
 .create-btn {
   display: block;

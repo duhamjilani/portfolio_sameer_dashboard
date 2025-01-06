@@ -21,6 +21,9 @@ const Home = () => {
 
   return (
     <div className="home-container">
+
+
+
       <Hero />
       <MyProjectsSection />
       {/* <WorkExpHome/> */}
