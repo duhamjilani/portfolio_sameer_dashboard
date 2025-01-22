@@ -9,6 +9,8 @@ import {
   WorkExpHome,
 } from "../index";
 import { useNavigate } from "react-router-dom";
+import TeachingExp from "./TeachingExp";
+import IndExp from "./IndExp.jsx";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,6 +29,8 @@ const Home = () => {
       <Hero />
       <MyProjectsSection />
       {/* <WorkExpHome/> */}
+      <TeachingExp/>
+      <IndExp/>
       <ResearchHome />
       <AwardsHome />
       <TrainingHome />

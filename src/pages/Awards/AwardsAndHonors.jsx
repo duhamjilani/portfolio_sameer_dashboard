@@ -18,6 +18,8 @@ const AwardsAndHonors = () => {
   });
 
   const navigate = useNavigate();
+  const [counter1, setCounter1] = useState("");
+  const [counter2, setCounter2] = useState("");
 
   // Fetch banner image
   const fetchBannerImage = async () => {
@@ -110,7 +112,7 @@ const AwardsAndHonors = () => {
     try {
       const updatedAward = await axios.put(
         `${apiURL}info/update/${id}`,
-        editedAward.isVisible && countVisible >= 3
+        editedAward.isVisible && countVisible >= 2
           ? { ...editedAward, isVisible: false }
           : editedAward
       );
@@ -164,11 +166,71 @@ const AwardsAndHonors = () => {
     const { name, value } = e.target;
     setEditedAward((prev) => ({ ...prev, [name]: value }));
   };
+  const fetchData = () => {
+    axios
+      .post(`${apiURL}content/update`, {
+        page: "awards",
+        section: "scholarshipsCounter2",
+      })
+      .then((response) => {
+        const scholarshipsCounter2 = response.data.data.content;
+        console.log(response.data)
+        setCounter2(scholarshipsCounter2);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
+    axios
+      .post(`${apiURL}content/update`, {
+        page: "awards",
+        section: "honorAwardsCounter1",
+      })
+      .then((response) => {
+        const honorAwardsCounter1 = response.data.data.content;
+        setCounter1(honorAwardsCounter1);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    axios
+      .put(`${apiURL}content/update`, {
+        page: "awards",
+        section: "honorAwardsCounter1",
+        content: counter1,
+      })
+      .then(() => {
+        Swal.fire("Success", " updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update ", "error");
+      });
+
+    axios
+      .put(`${apiURL}content/update`, {
+        page: "awards",
+        section: "scholarshipsCounter2",
+        content: counter2,
+      })
+      .then(() => {
+        Swal.fire("Success", " updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update ", "error");
+      });
+  };
+
 
   // Initial data fetch
   useEffect(() => {
     handleFetchAwards();
     fetchBannerImage();
+    fetchData();
   }, []);
 
   return (
@@ -204,7 +266,27 @@ const AwardsAndHonors = () => {
           </div>
         )}
       </div>
-
+      <form method="post" enctype="multipart/form-data">
+        <div className="counters">
+          <label>
+          Awards And Honors
+            <input
+              type="text"
+              value={counter1}
+              onChange={(e) => setCounter1(e.target.value)}
+            />
+          </label>
+          <label>
+          Scholarships
+            <input
+              type="text"
+              value={counter2}
+              onChange={(e) => setCounter2(e.target.value)}
+            />
+          </label>
+        </div>
+        <input type="submit" className="mainBtn" onClick={handleSubmit} />
+      </form>
       <div id="awards-container" className="awards-container">
         <button onClick={handleCreate} className="create-btn">
           Create New Award

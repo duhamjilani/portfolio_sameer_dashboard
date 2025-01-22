@@ -110,7 +110,7 @@ const MyProjectsSection = () => {
     <div className="projects-container">
       <form onSubmit={handleSubmit} className="projects-form">
         <div id="projects" className="projects-text">
-          <h4>Projects Text in the Home Page</h4>
+          <h4>Summary of my Achievements Text in the Home Page</h4>
           <textarea
             className="responsive-textarea"
             name="projectsText"
