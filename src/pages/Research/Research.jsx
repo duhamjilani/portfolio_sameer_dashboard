@@ -24,6 +24,8 @@ const Research = () => {
   const [counter5, setCounter5] = useState("");
   const [counter6, setCounter6] = useState("");
   const [counter7, setCounter7] = useState("");
+  const [counter8, setCounter8] = useState("");
+  const [counter9, setCounter9] = useState("");
   const [bannerImage, setBannerImage] = useState(null);
   const navigate = useNavigate();
 
@@ -84,12 +86,12 @@ const Research = () => {
     axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "i10IndexCounter1",
+        section: "RCounter1",
       })
       .then((response) => {
-        const i10IndexCounter1 = response.data.data.content;
+        const RCounter1 = response.data.data.content;
        
-        setCounter1(i10IndexCounter1);
+        setCounter1(RCounter1);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -100,12 +102,12 @@ const Research = () => {
       axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "CitationsCounter2",
+        section: "RCounter2",
       })
       .then((response) => {
-        const CitationsCounter2 = response.data.data.content;
+        const RCounter2 = response.data.data.content;
         
-        setCounter2(CitationsCounter2);
+        setCounter2(RCounter2);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -115,12 +117,12 @@ const Research = () => {
       axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "hIndexCounter3",
+        section: "RCounter3",
       })
       .then((response) => {
-        const hIndexCounter3 = response.data.data.content;
+        const RCounter3 = response.data.data.content;
         
-        setCounter3(hIndexCounter3);
+        setCounter3(RCounter3);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -131,12 +133,12 @@ const Research = () => {
       axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "PermanentJournalEditorRoleCounter4",
+        section: "RCounter4",
       })
       .then((response) => {
-        const PermanentJournalEditorRoleCounter4 = response.data.data.content;
+        const RCounter4 = response.data.data.content;
         
-        setCounter4(PermanentJournalEditorRoleCounter4);
+        setCounter4(RCounter4);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -146,12 +148,12 @@ const Research = () => {
       axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "RefereeingPublicationsCounter5",
+        section: "RCounter5",
       })
       .then((response) => {
-        const RefereeingPublicationsCounter5 = response.data.data.content;
+        const RCounter5 = response.data.data.content;
        
-        setCounter5(RefereeingPublicationsCounter5);
+        setCounter5(RCounter5);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -161,12 +163,12 @@ const Research = () => {
       axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "GuestEditedSpecialIssuesCounter6",
+        section: "RCounter6",
       })
       .then((response) => {
-        const GuestEditedSpecialIssuesCounter6 = response.data.data.content;
+        const RCounter6 = response.data.data.content;
         
-        setCounter6(GuestEditedSpecialIssuesCounter6);
+        setCounter6(RCounter6);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -180,17 +182,52 @@ const Research = () => {
       axios
       .post(`${apiURL}content/get-content`, {
         page: "Research",
-        section: "PublicationsInHighQualityJournalsConferencesCounter7",
+        section: "RCounter7",
       })
       .then((response) => {
-        const PublicationsInHighQualityJournalsConferencesCounter7 = response.data.data.content;
+        const RCounter7 = response.data.data.content;
        
-        setCounter7(PublicationsInHighQualityJournalsConferencesCounter7);
+        setCounter7(RCounter7);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
         // alert("Something went wrong while fetching data.");
       });
+
+
+      axios
+      .post(`${apiURL}content/get-content`, {
+        page: "Research",
+        section: "RCounter8",
+      })
+      .then((response) => {
+        const RCounter8 = response.data.data.content;
+       
+        setCounter8(RCounter8);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
+
+
+
+      axios
+      .post(`${apiURL}content/get-content`, {
+        page: "Research",
+        section: "RCounter9",
+      })
+      .then((response) => {
+        const RCounter9 = response.data.data.content;
+       
+        setCounter9(RCounter9);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
+
+
     
   };
 
@@ -309,7 +346,7 @@ const Research = () => {
     axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "i10IndexCounter1",
+        section: "RCounter1",
         content: counter1,
       })
       .then(() => {
@@ -323,7 +360,7 @@ const Research = () => {
       axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "CitationsCounter2",
+        section: "RCounter2",
         content: counter2,
       })
       .then(() => {
@@ -337,7 +374,7 @@ const Research = () => {
       axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "hIndexCounter3",
+        section: "RCounter3",
         content: counter3,
       })
       .then(() => {
@@ -351,7 +388,7 @@ const Research = () => {
       axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "PermanentJournalEditorRoleCounter4",
+        section: "RCounter4",
         content: counter4,
       })
       .then(() => {
@@ -365,7 +402,7 @@ const Research = () => {
       axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "RefereeingPublicationsCounter5",
+        section: "RCounter5",
         content: counter5,
       })
       .then(() => {
@@ -378,7 +415,7 @@ const Research = () => {
       axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "GuestEditedSpecialIssuesCounter6",
+        section: "RCounter6",
         content: counter6,
       })
       .then(() => {
@@ -393,8 +430,37 @@ const Research = () => {
       axios
       .put(`${apiURL}content/update`, {
         page: "Research",
-        section: "PublicationsInHighQualityJournalsConferencesCounter7",
+        section: "RCounter7",
         content: counter7,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "Research",
+        section: "RCounter8",
+        content: counter8,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "Research",
+        section: "RCounter9",
+        content: counter9,
       })
       .then(() => {
         Swal.fire("Success", "Projects updated successfully!", "success");
@@ -447,7 +513,7 @@ const Research = () => {
       <form method="post" enctype="multipart/form-data">
         <div className="counters">
           <label>
-            i-10 Index (Dec 2024)
+          Citations
             <input
               type="text"
               value={counter1}
@@ -456,7 +522,7 @@ const Research = () => {
             />
           </label>
           <label>
-            Citations (Dec 2024)
+          H-index 
             <input
               type="text"
               value={counter2}
@@ -464,7 +530,7 @@ const Research = () => {
             />
           </label>
           <label>
-            h-index (Scopus, Dec 2024)
+          Journal Publications 
             <input
               type="text"
               value={counter3}
@@ -472,7 +538,7 @@ const Research = () => {
             />
           </label>
           <label>
-            Permanent Journal Editor Role
+          Conference Proceedings 
             <input
               type="text"
               value={counter4}
@@ -480,7 +546,7 @@ const Research = () => {
             />
           </label>
           <label>
-            Guest-Edited Special Issues
+          Book Chapters 
             <input
               type="text"
               value={counter5}
@@ -488,7 +554,7 @@ const Research = () => {
             />
           </label>
           <label>
-            Refereeing Publications
+          Guest Editor SIS
             <input
               type="text"
               value={counter6}
@@ -496,11 +562,28 @@ const Research = () => {
             />
           </label>
           <label>
-            Publications in High-Quality Journals & Conferences
+          Permanent Editor 
             <input
               type="text"
               value={counter7}
               onChange={(e) => setCounter7(e.target.value)}
+            />
+          </label>
+
+          <label>
+          TPCs at Conferences 
+            <input
+              type="text"
+              value={counter8}
+              onChange={(e) => setCounter8(e.target.value)}
+            />
+          </label>
+          <label>
+          Journal Reviewer
+            <input
+              type="text"
+              value={counter9}
+              onChange={(e) => setCounter9(e.target.value)}
             />
           </label>
         </div>

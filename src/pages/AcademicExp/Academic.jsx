@@ -16,7 +16,16 @@ const Academic = () => {
     category: "",
     subCategory: "",
   });
-
+ const [counter1, setCounter1] = useState("");
+  const [counter2, setCounter2] = useState("");
+  const [counter3, setCounter3] = useState("");
+  const [counter4, setCounter4] = useState("");
+  const [counter5, setCounter5] = useState("");
+  const [counter6, setCounter6] = useState("");
+  const [counter7, setCounter7] = useState("");
+  const [counter8, setCounter8] = useState("");
+  const [counter9, setCounter9] = useState("");
+ 
   const navigate = useNavigate();
 
   // Check login status
@@ -47,7 +56,175 @@ const Academic = () => {
     } catch (error) {
       
     }
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter2",
+    })
+    .then((response) => {
+      const AcademicCounter2 = response.data.data.content;
+     
+      setCounter2(AcademicCounter2);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter3",
+    })
+    .then((response) => {
+      const AcademicCounter3 = response.data.data.content;
+     
+      setCounter3(AcademicCounter3);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter4",
+    })
+    .then((response) => {
+      const AcademicCounter4 = response.data.data.content;
+     
+      setCounter4(AcademicCounter4);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter5",
+    })
+    .then((response) => {
+      const AcademicCounter5 = response.data.data.content;
+     
+      setCounter5(AcademicCounter5);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter6",
+    })
+    .then((response) => {
+      const AcademicCounter6 = response.data.data.content;
+     
+      setCounter6(AcademicCounter6);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter7",
+    })
+    .then((response) => {
+      const AcademicCounter7 = response.data.data.content;
+     
+      setCounter7(AcademicCounter7);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter7",
+    })
+    .then((response) => {
+      const AcademicCounter7 = response.data.data.content;
+     
+      setCounter7(AcademicCounter7);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter8",
+    })
+    .then((response) => {
+      const AcademicCounter8 = response.data.data.content;
+     
+      setCounter8(AcademicCounter8);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+    axios
+    .post(`${apiURL}content/get-content`, {
+      page: "academic",
+      section: "AcademicCounter9",
+    })
+    .then((response) => {
+      const AcademicCounter9 = response.data.data.content;
+     
+      setCounter9(AcademicCounter9);
+    })
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+      // alert("Something went wrong while fetching data.");
+    });
+
+
+
+
+
+
+
   };
+
+
+
+ 
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     fetchData();
@@ -159,6 +336,178 @@ const Academic = () => {
     setEditedItem((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter1",
+        content: counter1,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter2",
+        content: counter2,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter3",
+        content: counter3,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter4",
+        content: counter4,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter5",
+        content: counter5,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter6",
+        content: counter6,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter7",
+        content: counter7,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter8",
+        content: counter8,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+      axios
+      .put(`${apiURL}content/update`, {
+        page: "academic",
+        section: "AcademicCounter9",
+        content: counter9,
+      })
+      .then(() => {
+        Swal.fire("Success", "Projects updated successfully!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update projects.", "error");
+      });
+
+
+
+
+
+
+
+
+     
+
+
+
+   
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="bigContainer">
       <h2>Academic And Professional Experience</h2>
@@ -182,6 +531,91 @@ const Academic = () => {
           ))}
         </div>
       </div>
+
+      <form method="post" enctype="multipart/form-data">
+        <div className="counters">
+          <label>
+           Undergraduate Courses Taught 
+            <input
+              type="text"
+              value={counter1}
+             
+              onChange={(e) => setCounter1(e.target.value)}
+            />
+          </label>
+          <label>
+         Graduate Courses Taught 
+            <input
+              type="text"
+              value={counter2}
+              onChange={(e) => setCounter2(e.target.value)}
+            />
+          </label>
+          <label>
+         Teaching Cooperation 
+            <input
+              type="text"
+              value={counter3}
+              onChange={(e) => setCounter3(e.target.value)}
+            />
+          </label>
+          <label>
+          Bachelor Students Advising 
+            <input
+              type="text"
+              value={counter4}
+              onChange={(e) => setCounter4(e.target.value)}
+            />
+          </label>
+          <label>
+          Master Students Advising  
+            <input
+              type="text"
+              value={counter5}
+              onChange={(e) => setCounter5(e.target.value)}
+            />
+          </label>
+          <label>
+          Doctorate Students Advising 
+            <input
+              type="text"
+              value={counter6}
+              onChange={(e) => setCounter6(e.target.value)}
+            />
+          </label>
+          <label>
+          Committees
+            <input
+              type="text"
+              value={counter7}
+              onChange={(e) => setCounter7(e.target.value)}
+            />
+          </label>
+
+          <label>
+          Admin Positions 
+            <input
+              type="text"
+              value={counter8}
+              onChange={(e) => setCounter8(e.target.value)}
+            />
+          </label>
+          <label>
+          Examination Boards 
+            <input
+              type="text"
+              value={counter9}
+              onChange={(e) => setCounter9(e.target.value)}
+            />
+          </label>
+        </div>
+        <input type="submit" className="mainBtn" onClick={handleSubmit} />
+      </form>
+
+
+
+
+
 
       <div className="academic-container">
         <button onClick={handleCreate} className="create-btn">

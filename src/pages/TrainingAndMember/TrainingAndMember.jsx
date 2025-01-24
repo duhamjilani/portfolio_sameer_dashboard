@@ -13,6 +13,7 @@ const TrainingAndMember = () => {
     date: "",
     description: "",
     isVisible: false,
+    location:"",
   });
   const [counter1, setCounter1] = useState("");
   const [counter2, setCounter2] = useState("");
@@ -154,6 +155,7 @@ const TrainingAndMember = () => {
       date: "",
       description: "",
       isVisible: false,
+      location:""
     };
 
     try {
@@ -178,7 +180,7 @@ const TrainingAndMember = () => {
       );
       setTraining(updatedTraining);
       setEditMode(null);
-      setEditedItem({ title: "", date: "", description: "", isVisible: false });
+      setEditedItem({ title: "", date: "", description: "", isVisible: false, location:"" });
       setCountVisible(
         updatedTraining.filter((item) => {
           return item.isVisible && item;
@@ -212,6 +214,7 @@ const TrainingAndMember = () => {
       date: item.date,
       description: item.description,
       isVisible: item.isVisible,
+      location:item.location
     });
   };
 
@@ -303,6 +306,18 @@ const TrainingAndMember = () => {
                       placeholder="Year"
                     />
                   </p>
+
+                  <p>
+                    <strong>location:</strong>
+                    <textarea
+                      name="location"
+                      value={editedItem.location}
+                      onChange={handleInputChange}
+                      placeholder="Training/Membership location"
+                    />
+                  </p>
+
+
                   <p>
                     <strong>Description:</strong>
                     <textarea

@@ -130,6 +130,7 @@ const AwardsHome = () => {
         value={awardsText}
         onChange={(e) => setAwardsText(e.target.value)}
       />
+       <div className="counters">
       <label>
         Enter value for Awards and Honors :
         <input
@@ -147,7 +148,7 @@ const AwardsHome = () => {
           onChange={(e) => setCounter2(e.target.value)}
         />
       </label>
-
+</div>
       <button onClick={sendData} className="mainBtn">
         Update
       </button>

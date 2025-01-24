@@ -129,14 +129,14 @@ const MyProjectsSection = () => {
               onChange={(e) => setCounter1(e.target.value)}
             />
           </label>
-          <label>
+          {/* <label>
             Enter value for Memberships:
             <input
               type="text"
               value={counter2}
               onChange={(e) => setCounter2(e.target.value)}
             />
-          </label>
+          </label> */}
         </div>
         <button type="submit" className="mainBtn">
           Update
