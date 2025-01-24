@@ -112,7 +112,7 @@ const AwardsAndHonors = () => {
     try {
       const updatedAward = await axios.put(
         `${apiURL}info/update/${id}`,
-        editedAward.isVisible && countVisible >= 3
+        editedAward.isVisible && countVisible >= 2
           ? { ...editedAward, isVisible: false }
           : editedAward
       );
