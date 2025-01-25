@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import TeachingExp from "./TeachingExp";
 import IndExp from "./IndExp.jsx";
+import MemberShips from "./MemberShips.jsx";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -34,6 +35,7 @@ const Home = () => {
       <ResearchHome />
       <AwardsHome />
       <TrainingHome />
+      <MemberShips/>
     </div>
   );
 };

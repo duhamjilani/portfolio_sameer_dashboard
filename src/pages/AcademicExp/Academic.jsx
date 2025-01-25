@@ -16,7 +16,7 @@ const Academic = () => {
     category: "",
     subCategory: "",
   });
- const [counter1, setCounter1] = useState("");
+  const [counter1, setCounter1] = useState("");
   const [counter2, setCounter2] = useState("");
   const [counter3, setCounter3] = useState("");
   const [counter4, setCounter4] = useState("");
@@ -25,7 +25,7 @@ const Academic = () => {
   const [counter7, setCounter7] = useState("");
   const [counter8, setCounter8] = useState("");
   const [counter9, setCounter9] = useState("");
- 
+
   const navigate = useNavigate();
 
   // Check login status
@@ -39,9 +39,7 @@ const Academic = () => {
     try {
       const response = await axios.get(`${apiURL}images/getImages/academic`);
       setImages(response.data.images);
-    } catch (error) {
-     
-    }
+    } catch (error) {}
   };
 
   // Fetch academic data
@@ -53,178 +51,142 @@ const Academic = () => {
         subCategory: editedItem.subCategory,
       });
       setAcademic(data.data.data);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter2",
-    })
-    .then((response) => {
-      const AcademicCounter2 = response.data.data.content;
-     
-      setCounter2(AcademicCounter2);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter2",
+      })
+      .then((response) => {
+        const AcademicCounter2 = response.data.data.content;
+
+        setCounter2(AcademicCounter2);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter3",
-    })
-    .then((response) => {
-      const AcademicCounter3 = response.data.data.content;
-     
-      setCounter3(AcademicCounter3);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter3",
+      })
+      .then((response) => {
+        const AcademicCounter3 = response.data.data.content;
 
-
-
+        setCounter3(AcademicCounter3);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter4",
-    })
-    .then((response) => {
-      const AcademicCounter4 = response.data.data.content;
-     
-      setCounter4(AcademicCounter4);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter4",
+      })
+      .then((response) => {
+        const AcademicCounter4 = response.data.data.content;
 
-
+        setCounter4(AcademicCounter4);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter5",
-    })
-    .then((response) => {
-      const AcademicCounter5 = response.data.data.content;
-     
-      setCounter5(AcademicCounter5);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter5",
+      })
+      .then((response) => {
+        const AcademicCounter5 = response.data.data.content;
 
-
+        setCounter5(AcademicCounter5);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter6",
-    })
-    .then((response) => {
-      const AcademicCounter6 = response.data.data.content;
-     
-      setCounter6(AcademicCounter6);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter6",
+      })
+      .then((response) => {
+        const AcademicCounter6 = response.data.data.content;
 
-
+        setCounter6(AcademicCounter6);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter7",
-    })
-    .then((response) => {
-      const AcademicCounter7 = response.data.data.content;
-     
-      setCounter7(AcademicCounter7);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter7",
+      })
+      .then((response) => {
+        const AcademicCounter7 = response.data.data.content;
 
-
+        setCounter7(AcademicCounter7);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter7",
-    })
-    .then((response) => {
-      const AcademicCounter7 = response.data.data.content;
-     
-      setCounter7(AcademicCounter7);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter7",
+      })
+      .then((response) => {
+        const AcademicCounter7 = response.data.data.content;
 
-
+        setCounter7(AcademicCounter7);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter8",
-    })
-    .then((response) => {
-      const AcademicCounter8 = response.data.data.content;
-     
-      setCounter8(AcademicCounter8);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter8",
+      })
+      .then((response) => {
+        const AcademicCounter8 = response.data.data.content;
 
-
+        setCounter8(AcademicCounter8);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
 
     axios
-    .post(`${apiURL}content/get-content`, {
-      page: "academic",
-      section: "AcademicCounter9",
-    })
-    .then((response) => {
-      const AcademicCounter9 = response.data.data.content;
-     
-      setCounter9(AcademicCounter9);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-      // alert("Something went wrong while fetching data.");
-    });
+      .post(`${apiURL}content/get-content`, {
+        page: "academic",
+        section: "AcademicCounter9",
+      })
+      .then((response) => {
+        const AcademicCounter9 = response.data.data.content;
 
-
-
-
-
-
-
+        setCounter9(AcademicCounter9);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // alert("Something went wrong while fetching data.");
+      });
   };
-
-
-
- 
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     fetchData();
@@ -248,7 +210,6 @@ const Academic = () => {
       Swal.fire("Success", "Image uploaded successfully!", "success");
       fetchImages();
     } catch (error) {
-     
       Swal.fire("Error", "Failed to upload image.", "error");
     }
   };
@@ -260,7 +221,6 @@ const Academic = () => {
       setImages(images.filter((image) => image._id !== id));
       Swal.fire("Deleted!", "Image deleted successfully.", "success");
     } catch (error) {
-     
       Swal.fire("Error", "Failed to delete image.", "error");
     }
   };
@@ -279,9 +239,7 @@ const Academic = () => {
     try {
       const response = await axios.post(`${apiURL}info/add`, newAcademic);
       setAcademic([...academic, response.data.data]);
-    } catch (error) {
-     
-    }
+    } catch (error) {}
   };
 
   // Update academic item
@@ -352,10 +310,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter2",
@@ -368,11 +323,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-
-
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter3",
@@ -385,13 +336,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-
-
-
-
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter4",
@@ -404,8 +349,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter5",
@@ -418,11 +362,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-
-
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter6",
@@ -435,11 +375,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-
-
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter7",
@@ -452,8 +388,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter8",
@@ -466,10 +401,7 @@ const Academic = () => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
 
-
-
-
-      axios
+    axios
       .put(`${apiURL}content/update`, {
         page: "academic",
         section: "AcademicCounter9",
@@ -481,32 +413,7 @@ const Academic = () => {
       .catch(() => {
         Swal.fire("Error", "Failed to update projects.", "error");
       });
-
-
-
-
-
-
-
-
-     
-
-
-
-   
   };
-
-
-
-
-
-
-
-
-
-
-
-
 
   return (
     <div className="bigContainer">
@@ -535,16 +442,15 @@ const Academic = () => {
       <form method="post" enctype="multipart/form-data">
         <div className="counters">
           <label>
-           Undergraduate Courses Taught 
+            Undergraduate Courses Taught
             <input
               type="text"
               value={counter1}
-             
               onChange={(e) => setCounter1(e.target.value)}
             />
           </label>
           <label>
-         Graduate Courses Taught 
+            Graduate Courses Taught
             <input
               type="text"
               value={counter2}
@@ -552,7 +458,7 @@ const Academic = () => {
             />
           </label>
           <label>
-         Teaching Cooperation 
+            Teaching Cooperation
             <input
               type="text"
               value={counter3}
@@ -560,7 +466,7 @@ const Academic = () => {
             />
           </label>
           <label>
-          Bachelor Students Advising 
+            Bachelor Students Advising
             <input
               type="text"
               value={counter4}
@@ -568,7 +474,7 @@ const Academic = () => {
             />
           </label>
           <label>
-          Master Students Advising  
+            Master Students Advising
             <input
               type="text"
               value={counter5}
@@ -576,7 +482,7 @@ const Academic = () => {
             />
           </label>
           <label>
-          Doctorate Students Advising 
+            Doctorate Students Advising
             <input
               type="text"
               value={counter6}
@@ -584,7 +490,7 @@ const Academic = () => {
             />
           </label>
           <label>
-          Committees
+            Committees
             <input
               type="text"
               value={counter7}
@@ -593,7 +499,7 @@ const Academic = () => {
           </label>
 
           <label>
-          Admin Positions 
+            Admin Positions
             <input
               type="text"
               value={counter8}
@@ -601,7 +507,7 @@ const Academic = () => {
             />
           </label>
           <label>
-          Examination Boards 
+            Examination Boards
             <input
               type="text"
               value={counter9}
@@ -611,11 +517,6 @@ const Academic = () => {
         </div>
         <input type="submit" className="mainBtn" onClick={handleSubmit} />
       </form>
-
-
-
-
-
 
       <div className="academic-container">
         <button onClick={handleCreate} className="create-btn">
@@ -667,9 +568,7 @@ const Academic = () => {
                       <option value="University Administrative Position">
                         University Administrative Position
                       </option>
-                      <option value="Student Advising">
-                        Student Advising
-                      </option>
+                      <option value="Student Advising">Student Advising</option>
                       <option value="Examination Boards">
                         Examination Boards
                       </option>
@@ -711,10 +610,7 @@ const Academic = () => {
                   <p>
                     <strong>Description:</strong> {item.description}
                   </p>
-                  <button
-                    onClick={() => handleEdit(item)}
-                    className="mainBtn"
-                  >
+                  <button onClick={() => handleEdit(item)} className="mainBtn">
                     Edit
                   </button>
                 </>
